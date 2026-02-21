@@ -284,7 +284,7 @@ class ApiClient {
   async transcribeAudio(file: File, language?: LanguageCode): Promise<TranscriptionResponse> {
     const formData = new FormData();
     formData.append('file', file);
-    if (language) {
+    if (language && language !== 'auto') {
       formData.append('language', language);
     }
 
