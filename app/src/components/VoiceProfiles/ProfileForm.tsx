@@ -332,7 +332,8 @@ export function ProfileForm() {
 
     try {
       const language = form.getValues('language');
-      const result = await transcribe.mutateAsync({ file, language });
+      const languageHint = language === 'auto' ? undefined : language;
+      const result = await transcribe.mutateAsync({ file, language: languageHint });
 
       form.setValue('referenceText', result.text, { shouldValidate: true });
     } catch (error) {

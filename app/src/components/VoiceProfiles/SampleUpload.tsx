@@ -27,6 +27,7 @@ import { useAudioRecording } from '@/lib/hooks/useAudioRecording';
 import { useAddSample, useProfile } from '@/lib/hooks/useProfiles';
 import { useSystemAudioCapture } from '@/lib/hooks/useSystemAudioCapture';
 import { useTranscription } from '@/lib/hooks/useTranscription';
+import type { LanguageCode } from '@/lib/constants/languages';
 import { usePlatform } from '@/platform/PlatformContext';
 import { AudioSampleRecording } from './AudioSampleRecording';
 import { AudioSampleSystem } from './AudioSampleSystem';
@@ -153,8 +154,9 @@ export function SampleUpload({ profileId, open, onOpenChange }: SampleUploadProp
     }
 
     try {
-      const language = profile?.language as 'en' | 'zh' | undefined;
-      const result = await transcribe.mutateAsync({ file, language });
+      const language = profile?.language as LanguageCode | undefined;
+      const languageHint = language === 'auto' ? undefined : language;
+      const result = await transcribe.mutateAsync({ file, language: languageHint });
 
       form.setValue('referenceText', result.text, { shouldValidate: true });
     } catch (error) {

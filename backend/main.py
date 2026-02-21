@@ -846,7 +846,8 @@ async def transcribe_audio(
                 }
             )
 
-        text = await whisper_model.transcribe(tmp_path, language)
+        language_hint = None if not language or language.lower() == "auto" else language
+        text = await whisper_model.transcribe(tmp_path, language_hint)
         
         return models.TranscriptionResponse(
             text=text,

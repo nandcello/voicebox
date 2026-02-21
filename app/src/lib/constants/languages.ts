@@ -1,9 +1,10 @@
 /**
- * Supported languages for Qwen3-TTS
+ * Supported languages for Qwen3-TTS (plus auto-detect option)
  * Based on: https://github.com/QwenLM/Qwen3-TTS
  */
 
 export const SUPPORTED_LANGUAGES = {
+  auto: 'Auto (detect)',
   zh: 'Chinese',
   en: 'English',
   ja: 'Japanese',
